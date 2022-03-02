@@ -1,12 +1,15 @@
 # BEGIN_KITTY_SHELL_INTEGRATION
-#if test -e "$KITTY_INSTALLATION_DIR/shell-integration/bash/kitty.bash"; then source "$KITTY_INSTALLATION_DIR/shell-integration/bash/kitty.bash"; fi
+# if test -n "$KITTY_INSTALLATION_DIR" -a -e "$KITTY_INSTALLATION_DIR/shell-integration/bash/kitty.bash"; then source "$KITTY_INSTALLATION_DIR/shell-integration/bash/kitty.bash"; fi
 # END_KITTY_SHELL_INTEGRATION
 
 ### EXPORT
+export PS1="[\[\033[32m\]\w]\[\033[0m\]\[\033[1;36m\]-> \[\033[0m\]" # set bash prompt in case starship does not start
 export SHELL=/bin/bash
 export PATH="/usr/local/sbin:$PATH"
 export TERM=xterm
-#export DOCKER_DEFAULT_PLATFORM=linux/amd64
+# export DOCKER_DEFAULT_PLATFORM=linux/amd64
+# export CLICOLOR=1
+# export LSCOLORS=GxFxCxDxBxegedabagaced
 
 export PATH="/opt/homebrew/opt/curl/bin:$PATH"
 
@@ -46,9 +49,22 @@ alias grep='grep --color=auto'
 alias egrep='egrep --color=auto'
 alias fgrep='fgrep --color=auto'
 
+# misc
+alias generate-uuid-wo-dash="uuidgen | tr -d - | tr -d '\n' | tr '[:upper:]' '[:lower:]'  | pbcopy && pbpaste && echo"
+alias generate-uuid-with-dash="uuidgen | tr -d '\n' | tr '[:upper:]' '[:lower:]'  | pbcopy && pbpaste && echo"
+alias dns-flushcache="sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder"
+
 ### saml2aws ###
-eval "$(saml2aws --completion-script-bash)"
+# eval "$(saml2aws --completion-script-bash)"
+
+### NVM SETTINGS ###
+# export NVM_DIR="$HOME/.nvm"
+# [ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
+# [ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && . "/usr/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+
+### RANDOM COLOR SCRIPT ###
+# Get this script from my GitLab: gitlab.com/dwt1/shell-color-scripts
+# colorscript random
 
 ### SETTING THE STARSHIP PROMPT ###
 eval "$(starship init bash --print-full-init)"
-
