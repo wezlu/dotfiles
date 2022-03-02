@@ -1,0 +1,20 @@
+# Don't print a new line at the start of the prompt
+add_newline = false
+
+# Make prompt a single line instead of two lines
+[line_break]
+disabled = true
+
+[battery]
+full_symbol = "🔋 "
+charging_symbol = "⚡️ "
+discharging_symbol = "💀 "
+
+# "bold red" style when capacity is between 10% and 20%
+[[battery.display]]
+threshold = 20
+style = "bold red"
+
+# Disable the package module, hiding it from the prompt completely
+[aws]
+disabled = true
